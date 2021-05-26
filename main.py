@@ -46,7 +46,6 @@ def generate_maze(grid, maze_size, complexe):
     grid_creator(grid, maze_size)
     while endgen(grid):
 
-
         """"#a = maze_size - 2
         #b = maze_size - 1
         x = random.randint(0, maze_size - 2)

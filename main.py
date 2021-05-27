@@ -4,8 +4,8 @@ from tkinter import *
 from graphic import *
 
 def endgen(grid):
-    for j in range(0, len(grid)):
-        for i in range(0, len(grid[j])):
+    for j in range(1, len(grid), 2):
+        for i in range(1, len(grid[j]), 2):
             if grid[i][j] != grid[1][1]:
                 return False
     return True
@@ -42,15 +42,19 @@ def grid_creator(grid, maze_size):
 def generate_maze(grid, maze_size, complexe):
     finished = False
     grid_creator(grid, maze_size)
-    print(grid)
     while not endgen(grid):
         x = random.randint(1, maze_size - 2)
         if x % 2 == 0:
             y = random.randint(1, maze_size - 2)
             if y % 2 == 0:
-                x -= 1
-                cell1 = grid[y - 1][x]
-                cell2 = grid[y + 1][x]
+                if x == 1:
+                    x += 1
+                    cell1 = grid[y - 1][x]
+                    cell2 = grid[y + 1][x]
+                else:
+                    x -= 1
+                    cell1 = grid[y - 1][x]
+                    cell2 = grid[y + 1][x]
             else:
                 cell1 = grid[y][x - 1]
                 cell2 = grid[y][x + 1]
@@ -60,16 +64,24 @@ def generate_maze(grid, maze_size, complexe):
                 cell1 = grid[y - 1][x]
                 cell2 = grid[y + 1][x]
             else:
-                x -= 1
-                cell1 = grid[y][x - 1]
-                cell2 = grid[y][x + 1]
+                if x == 1:
+                    x += 1
+                    cell1 = grid[y][x - 1]
+                    cell2 = grid[y][x + 1]
+                else:
+                    x -= 1
+                    cell1 = grid[y][x - 1]
+                    cell2 = grid[y][x + 1]
         if cell1 != cell2:
             grid[x][y] = 0
             for j in range(1, len(grid), 2):
                 for i in range(1, len(grid[j]), 2):
                     if grid[j][i] == cell2:
                         grid[j][i] = cell1
+    grid[1][0] = grid[1][1]
+    grid[maze_size - 2][maze_size - 1] = grid[1][1]
     print(grid)
+
 
 if __name__ == '__main__':
     root = Tk()
@@ -101,3 +113,4 @@ if __name__ == '__main__':
             print("Veuillez mettre 'o' ou 'n' !")
     grid = numpy.array([[0] * maze_size] * maze_size)
     generate_maze(grid, maze_size, complexe)
+    pass

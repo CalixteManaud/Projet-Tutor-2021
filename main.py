@@ -6,9 +6,7 @@ from graphic import *
 def endgen(grid):
     for j in range(0, len(grid)):
         for i in range(0, len(grid[j])):
-            if grid[i][j] < 0:
-             continue
-            elif grid[i][j] != grid[1][1]:
+            if grid[i][j] != grid[1][1]:
                 return False
     return True
 
@@ -44,48 +42,34 @@ def grid_creator(grid, maze_size):
 def generate_maze(grid, maze_size, complexe):
     finished = False
     grid_creator(grid, maze_size)
-    while endgen(grid):
-
-        """"#a = maze_size - 2
-        #b = maze_size - 1
-        x = random.randint(0, maze_size - 2)
-        x += 1
-        if x % 2 == 0:
-            #b = b/2
-            y = random.randint(0, maze_size - 1)
-            y = y + 1
-        else:
-            #a = a/2
-            y = random.randint(0, maze_size - 2)
-            y = y + 2
-        if grid[x-1][y] == -1:
-            cell1 = grid[x][y - 1]
-            cell2 = grid[x][y + 1]
-        else:
-            cell1 = grid[x - 1][y]
-            cell2 = grid[x + 1][y]
-        if cell1 != cell2:
-            grid[x][y]
-            for j in range(0, len(grid)):
-                for i in range(0, len(grid[j])):
-                    if grid[i][j] == cell2:
-                        grid[i][j] = cell1"""
-    """if complexe:
-          for j in range(0, len(grid)):
-            for i in range(0, len(grid[j])):
-                x = random.randint(0, maze_size - 2)
-                x += 1
-            if x % 2 == 0:
-                #b = b/2
-                y = random.randint(0, maze_size - 2)
-                y = y + 1
-            else:
-                #a = a/2
-                y = random.randint(0, maze_size - 2)
-                y = y + 2
-            grid[x][y] = 0"""
     print(grid)
-
+    while not endgen(grid):
+        x = random.randint(1, maze_size - 2)
+        if x % 2 == 0:
+            y = random.randint(1, maze_size - 2)
+            if y % 2 == 0:
+                x -= 1
+                cell1 = grid[y - 1][x]
+                cell2 = grid[y + 1][x]
+            else:
+                cell1 = grid[y][x - 1]
+                cell2 = grid[y][x + 1]
+        else:
+            y = random.randint(1, maze_size - 2)
+            if y % 2 == 0:
+                cell1 = grid[y - 1][x]
+                cell2 = grid[y + 1][x]
+            else:
+                x -= 1
+                cell1 = grid[y][x - 1]
+                cell2 = grid[y][x + 1]
+        if cell1 != cell2:
+            grid[x][y] = 0
+            for j in range(1, len(grid), 2):
+                for i in range(1, len(grid[j]), 2):
+                    if grid[j][i] == cell2:
+                        grid[j][i] = cell1
+    print(grid)
 
 if __name__ == '__main__':
     root = Tk()

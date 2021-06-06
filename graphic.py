@@ -15,6 +15,7 @@ class Table:
                 self.e.insert(END, '█')
 
     def changecell(self, root, row, column, wall):
+
         if wall: self.e = Entry(root, width=1, fg='white', font=('Arial', 12, 'bold'),
                                 bd=0, relief='flat', bg='white')
         if not wall: self.e = Entry(root, width=1, fg='black', font=('Arial', 12, 'bold'), bd=0, relief='flat',

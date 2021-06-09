@@ -4,12 +4,14 @@ import tkinter as tk
 from graphic import *
 from tkinter import ttk
 
+
 def endgen(grid):
     for j in range(1, len(grid), 2):
         for i in range(1, len(grid[j]), 2):
             if grid[i][j] != grid[1][1]:
                 return False
     return True
+
 
 def grid_creator(grid, maze_size):
     k = 0
@@ -19,7 +21,7 @@ def grid_creator(grid, maze_size):
                 grid[i][j] = -1
             if j % 2 == 0:
                 grid[i][j] = -1
-            if j == maze_size-1:
+            if j == maze_size - 1:
                 grid[i][j] = -1
             if i == maze_size - 1:
                 grid[i][j] = -1
@@ -91,22 +93,20 @@ def generate_maze(grid, maze_size, complexe):
     createLab(grid)
 
 
-
-
 def createLab():
     root = Tk()
     root.title("Labyrinthe")
     root.geometry("1900x1000")
     root.attributes('-fullscreen', True)
     root.lift()
-    canvas = Canvas(root, height=5000, width=5000, scrollregion=(0,0,3000,3000))
+    canvas = Canvas(root, height=5000, width=5000, scrollregion=(0, 0, 3000, 3000))
     hbar = Scrollbar(root, orient=HORIZONTAL)
     hbar.pack(side=BOTTOM, fill=X)
     hbar.config(command=canvas.xview)
     vbar = Scrollbar(root, orient=VERTICAL)
     vbar.pack(side=RIGHT, fill=Y)
     vbar.config(command=canvas.yview)
-    canvas.config(xscrollcommand = hbar.set, yscrollcommand=vbar.set)
+    canvas.config(xscrollcommand=hbar.set, yscrollcommand=vbar.set)
     l = Label(root, text="Quelle taille de labyrinthe voulez vous ?\nSaisissez un taille impaire entre "
                          "10 et 50 : ", pady=5)
     l.config(font=("Courier", 10), pady=5)
@@ -126,15 +126,40 @@ def createLab():
     gap = 15
     for i in range(len(grid)):
         for j in range(len(grid[i])):
-            if (grid[i][j] == -1):
-                canvas.create_rectangle(1 + gap*j, 1 + gap * i+1, gap + gap * j+1, gap + gap * i,
+            if grid[i][j] == -1:
+                canvas.create_rectangle(1 + gap * j, 1 + gap * i + 1, gap + gap * j + 1, gap + gap * i,
                                         outline="black", fill="#fb0")
 
     b.pack()
     q.pack()
     canvas.pack()
     root.mainloop()
+    for j in range(0, len(grid)):
+        for i in range(0, len(grid[j])):
+            if grid[i][j] > 0:
+                grid[i][j] = 0
+    distance(grid, maze_size)
 
+
+def distance(grid, maze_size):
+    grid[maze_size - 2][maze_size - 1] = 1
+    k = 1
+    while grid[1][1] == 0:
+        for i in range(len(grid) - 2, 0, -1):
+            for j in range(len(grid[i]) - 2, 0, -1):
+                if grid[i][j] == 0:
+                    if grid[i+1][j] > 0 or grid[i-1][j] > 0 or grid[i][j+1] > 0 or grid[i][j-1] > 0:
+                        k += 1
+                        grid[i][j] = k
+
+
+def solveMaze(grid, maze_size):
+    while grid[i][j] == grid[maze_size-2][maze_size-1]:
+        for i in range(len(grid)):
+            for j in range(len(grid[i])):
+                if grid[i][j] < grid[i+1][j] or grid[i][j] < grid[i-1][j] or grid[i][j] < grid[i][j+1] or \
+                        grid[i][j] < grid[i][j-1]:
+                    grid[i][j] = 0
 
 
 if __name__ == '__main__':

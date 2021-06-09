@@ -1,6 +1,8 @@
 import numpy
 import random
 from tkinter import *
+
+import graphic
 from graphic import *
 
 def endgen(grid):
@@ -90,8 +92,6 @@ def generate_maze(grid, maze_size, complexe):
 
 
 if __name__ == '__main__':
-    root = Tk()
-    t = Table(root)
     sizeerror = True
     erreurC = True
     complexe = False
@@ -119,4 +119,5 @@ if __name__ == '__main__':
             print("Veuillez mettre 'o' ou 'n' !")
     grid = numpy.array([[0] * maze_size] * maze_size)
     generate_maze(grid, maze_size, complexe)
+    graphic.lab(grid)
     pass

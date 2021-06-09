@@ -1,7 +1,8 @@
 import numpy
 import random
-from tkinter import *
+import tkinter as tk
 from graphic import *
+from tkinter import ttk
 
 def endgen(grid):
     for j in range(1, len(grid), 2):
@@ -87,36 +88,79 @@ def generate_maze(grid, maze_size, complexe):
                 grid[y][x] = 0
     grid[1][0] = grid[1][1]
     grid[maze_size - 2][maze_size - 1] = grid[1][1]
+    createLab(grid)
+
+
+
+
+def createLab():
+    root = Tk()
+    root.title("Labyrinthe")
+    root.geometry("1900x1000")
+    root.attributes('-fullscreen', True)
+    root.lift()
+    canvas = Canvas(root, height=5000, width=5000, scrollregion=(0,0,3000,3000))
+    hbar = Scrollbar(root, orient=HORIZONTAL)
+    hbar.pack(side=BOTTOM, fill=X)
+    hbar.config(command=canvas.xview)
+    vbar = Scrollbar(root, orient=VERTICAL)
+    vbar.pack(side=RIGHT, fill=Y)
+    vbar.config(command=canvas.yview)
+    canvas.config(xscrollcommand = hbar.set, yscrollcommand=vbar.set)
+    l = Label(root, text="Quelle taille de labyrinthe voulez vous ?\nSaisissez un taille impaire entre "
+                         "10 et 50 : ", pady=5)
+    l.config(font=("Courier", 10), pady=5)
+    t = Text(root, height=2, width=10)
+    varcb = False
+    l.pack()
+    t.pack
+    c = Checkbutton(root, text="Le Labyrinthe est-il complexe ?", pady=5, variable=varcb)
+    c.pack()
+    maze_size = l.cget("text")
+    print(maze_size)
+    check = tk.BooleanVar()
+    grid = numpy.array([[0] * maze_size] * maze_size)
+    b = Button(root, text="Créer le Labyrinthe", pady=5, command=
+    generate_maze(grid, maze_size, check))
+    q = Button(root, text="Quitter", pady=5, command=root.quit)
+    gap = 15
+    for i in range(len(grid)):
+        for j in range(len(grid[i])):
+            if (grid[i][j] == -1):
+                canvas.create_rectangle(1 + gap*j, 1 + gap * i+1, gap + gap * j+1, gap + gap * i,
+                                        outline="black", fill="#fb0")
+
+    b.pack()
+    q.pack()
+    canvas.pack()
+    root.mainloop()
+
 
 
 if __name__ == '__main__':
-    root = Tk()
-    t = Table(root)
     sizeerror = True
     erreurC = True
     complexe = False
-    while sizeerror:
-        try:
-            maze_size = int(input("Quelle taille de labyrinthe voulez vous ? Saisissez un taille impaire entre "
-                                  "10 et 50 : "))
-            if 10 <= maze_size <= 50 and maze_size % 2 == 1:
-                sizeerror = False
-                break
-            print("La taille n'est pas valide !")
-        except Exception:
-            print("Veuillez mettre une bonne valeur !")
-    while erreurC:
-        try:
-            c = str(input("Le labyrinthe est-il complexe ? (o/n) : "))
-            if c == 'o':
-                complexe = True
-                break
-            elif c == 'n':
-                complexe = False
-                break
-            print("Saisissez 'o' ou 'n' !")
-        except Exception:
-            print("Veuillez mettre 'o' ou 'n' !")
-    grid = numpy.array([[0] * maze_size] * maze_size)
-    generate_maze(grid, maze_size, complexe)
-    pass
+    createLab()
+    # while sizeerror:
+    #     try:
+    #         maze_size = int(input("Quelle taille de labyrinthe voulez vous ? Saisissez un taille impaire entre "
+    #                               "10 et 50 : "))
+    #         if 10 <= maze_size <= 50000 and maze_size % 2 == 1:
+    #             sizeerror = False
+    #             break
+    #         print("La taille n'est pas valide !")
+    #     except Exception:
+    #         print("Veuillez mettre une bonne valeur !")
+    # while erreurC:
+    #     try:
+    #         c = str(input("Le labyrinthe est-il complexe ? (o/n) : "))
+    #         if c == 'o':
+    #             complexe = True
+    #             break
+    #         elif c == 'n':
+    #             complexe = False
+    #             break
+    #         print("Saisissez 'o' ou 'n' !")
+    #     except Exception:
+    #         print("Veuillez mettre 'o' ou 'n' !")

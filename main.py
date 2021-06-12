@@ -46,7 +46,6 @@ def grid_creator(grid, maze_size):
 def generate_maze(grid, maze_size, complexe):
     finished = False
     grid_creator(grid, maze_size)
-    print(grid)
     while not endgen(grid):
         x = random.randint(1, maze_size - 2)
         if x % 2 == 0:
@@ -96,31 +95,45 @@ def generate_maze(grid, maze_size, complexe):
             if grid[i][j] > 0:
                 grid[i][j] = 0
     distance(grid, maze_size)
-    #solveMaze(grid, maze_size)
+    solveMaze(grid, maze_size)
 
 
 def distance(grid, maze_size):
     grid[maze_size - 2][maze_size - 1] = 1
     k = 1
     while grid[1][1] == 0:
-        k += 1
-        for i in range(len(grid) - 2, 0, -1):
-            for j in range(len(grid[i]) - 2, 0, -1):
+        for j in range(len(grid) - 2, 0, -1):
+            for i in range(len(grid[j]) - 2, 0, -1):
                 if grid[i][j] == 0:
                     if grid[i + 1][j] > 0 or grid[i - 1][j] > 0 or grid[i][j + 1] > 0 or grid[i][j - 1] > 0:
+                        k += 1
                         grid[i][j] = k
+    for i in range(0, len(grid)):
+        for j in range(0, len(grid[i])):
+            if grid[i][j] == 0:
+                grid[i][j] = k+1
+
+
+def solveMaze(grid, maze_size):
+    x = 1
+    y = 1
+    while x != maze_size - 1 and y != maze_size - 1:
+        if grid[x][y] >= grid[x+1][y] > 0:
+            grid[x][y] = 0
+            x += 1
+        elif grid[x][y] >= grid[x-1][y] > 0:
+            grid[x][y] = 0
+            x -= 1
+        elif grid[x][y] >= grid[x][y-1] > 0:
+            grid[x][y] = 0
+            y -= 1
+        elif grid[x][y] >= grid[x][y+1] > 0:
+            grid[x][y] = 0
+            y += 1
+    grid[1][0] = 0
+    grid[maze_size - 2][maze_size - 1] = 0
     print()
     print(grid)
-
-
-"""def solveMaze(grid, maze_size):
-    print(grid)
-    for i in range(len(grid)):
-        for j in range(len(grid[i])):
-            if grid[i][j] > 0:
-                if grid[i][j] < grid[i + 1][j] or grid[i][j] < grid[i - 1][j] or grid[i][j] < grid[i][j + 1] or \
-                        grid[i][j] < grid[i][j - 1]:
-                    grid[i][j] = 0"""
 
 
 if __name__ == '__main__':

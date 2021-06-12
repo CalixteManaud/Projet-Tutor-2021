@@ -94,8 +94,6 @@ def generate_maze(grid, maze_size, complexe):
         for i in range(0, len(grid[j])):
             if grid[i][j] > 0:
                 grid[i][j] = 0
-    distance(grid, maze_size)
-    solveMaze(grid, maze_size)
 
 
 def distance(grid, maze_size):
@@ -164,5 +162,7 @@ if __name__ == '__main__':
             print("Veuillez mettre 'o' ou 'n' !")
     grid = numpy.array([[0] * maze_size] * maze_size)
     generate_maze(grid, maze_size, complexe)
+    distance(grid, maze_size)
+    solveMaze(grid, maze_size)
     graphic.lab(grid)
     pass

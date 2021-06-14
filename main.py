@@ -162,7 +162,8 @@ if __name__ == '__main__':
             print("Veuillez mettre 'o' ou 'n' !")
     grid = numpy.array([[0] * maze_size] * maze_size)
     generate_maze(grid, maze_size, complexe)
+
+
+    g = graphic(grid)
     distance(grid, maze_size)
     solveMaze(grid, maze_size)
-    graphic.lab(grid)
-    pass

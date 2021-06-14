@@ -1,7 +1,7 @@
 import numpy
 import random
 from tkinter import *
-
+import time
 import graphic
 from graphic import *
 
@@ -112,26 +112,30 @@ def distance(grid, maze_size):
                 grid[i][j] = k+1
 
 
-def solveMaze(grid, maze_size):
+def solveMaze(grid, maze_size, g):
     x = 1
     y = 1
+    g.changecell(0, 1)
+    g.changecell(y,x)
     while x != maze_size - 1 and y != maze_size - 1:
         if grid[x][y] >= grid[x+1][y] > 0:
             grid[x][y] = 0
             x += 1
+            g.changecell(y,x)
         elif grid[x][y] >= grid[x-1][y] > 0:
             grid[x][y] = 0
             x -= 1
+            g.changecell(y,x)
         elif grid[x][y] >= grid[x][y-1] > 0:
             grid[x][y] = 0
             y -= 1
+            g.changecell(y,x)
         elif grid[x][y] >= grid[x][y+1] > 0:
             grid[x][y] = 0
             y += 1
+            g.changecell(y,x)
     grid[1][0] = 0
     grid[maze_size - 2][maze_size - 1] = 0
-    print()
-    print(grid)
 
 
 if __name__ == '__main__':
@@ -141,8 +145,8 @@ if __name__ == '__main__':
     while sizeerror:
         try:
             maze_size = int(input("Quelle taille de labyrinthe voulez vous ? Saisissez un taille impaire entre "
-                                  "10 et 50 : "))
-            if 10 <= maze_size <= 50 and maze_size % 2 == 1:
+                                  "10 et 60 : "))
+            if 10 <= maze_size <= 60 and maze_size % 2 == 1:
                 sizeerror = False
                 break
             print("La taille n'est pas valide !")
@@ -165,6 +169,6 @@ if __name__ == '__main__':
 
 
     g = graphic(grid)
-    g.changecell(1,1)
     distance(grid, maze_size)
-    solveMaze(grid, maze_size)
+    solveMaze(grid, maze_size, g)
+    g.end()

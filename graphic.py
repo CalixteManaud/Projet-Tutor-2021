@@ -1,4 +1,5 @@
 from tkinter import *
+import time
 
 class graphic():
 
@@ -34,7 +35,7 @@ class graphic():
         for i in range(len(grid)):
             for j in range(len(grid[i])):
                 if (grid[i][j] == -1):
-                    self.canvas.create_rectangle(307 + gap * j, 1 + gap * i , 307 + gap + gap * j, 1 + gap + gap * i,
+                    self.canvas.create_rectangle(100 + gap * j, 1 + gap * i , 100 + gap + gap * j, 1 + gap + gap * i,
                                             outline="black", fill="#fb0")
         b.pack()
         q.pack()
@@ -44,11 +45,11 @@ class graphic():
     def changecell(self, x, y):
 
         gap = 15
-        self.canvas.create_rectangle(307 + gap * x, 1 + gap * y, 307 + gap + gap * y, 1 + gap + gap * x,
+        self.canvas.create_rectangle(100 + gap * x, 1 + gap * y, 100 + gap + gap * x, 1 + gap + gap * y,
                                 outline="black", fill="#8B0000")
         self.canvas.pack()
         self.root.update()
-        pass
+        time.sleep(0.05)
 
     def end(self):
         self.root.mainloop()

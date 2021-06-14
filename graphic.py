@@ -1,5 +1,6 @@
 from tkinter import *
 import time
+from main import *
 
 class graphic():
 
@@ -29,7 +30,7 @@ class graphic():
         t.pack
         c = Checkbutton(self.root, text="Le Labyrinthe est-il complexe ?", pady=5)
         c.pack()
-        b = Button(self.root, text="Créer le Labyrinthe", pady=5)
+        b = Button(self.root, text="Créer le Labyrinthe", pady=5, command=self.root.quit())
         q = Button(self.root, text="Quitter", pady=5, command=self.root.quit)
         gap = 15
         for i in range(len(grid)):
@@ -40,7 +41,7 @@ class graphic():
         b.pack()
         q.pack()
         self.canvas.pack()
-        self.root.update()
+        self.root.mainloop()
 
     def changecell(self, x, y):
 

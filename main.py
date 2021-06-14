@@ -142,32 +142,32 @@ if __name__ == '__main__':
     sizeerror = True
     erreurC = True
     complexe = False
-    while sizeerror:
-        try:
-            maze_size = int(input("Quelle taille de labyrinthe voulez vous ? Saisissez un taille impaire entre "
-                                  "10 et 60 : "))
-            if 10 <= maze_size <= 60 and maze_size % 2 == 1:
-                sizeerror = False
-                break
-            print("La taille n'est pas valide !")
-        except Exception:
-            print("Veuillez mettre une bonne valeur !")
-    while erreurC:
-        try:
-            c = str(input("Le labyrinthe est-il complexe ? (o/n) : "))
-            if c == 'o':
-                complexe = True
-                break
-            elif c == 'n':
-                complexe = False
-                break
-            print("Saisissez 'o' ou 'n' !")
-        except Exception:
-            print("Veuillez mettre 'o' ou 'n' !")
+    maze_size = 15
+    complexe = True
+    # while sizeerror:
+    #     try:
+    #         maze_size = int(input("Quelle taille de labyrinthe voulez vous ? Saisissez un taille impaire entre "
+    #                               "10 et 60 : "))
+    #         if 10 <= maze_size <= 60 and maze_size % 2 == 1:
+    #             sizeerror = False
+    #             break
+    #         print("La taille n'est pas valide !")
+    #     except Exception:
+    #         print("Veuillez mettre une bonne valeur !")
+    # while erreurC:
+    #     try:
+    #         c = str(input("Le labyrinthe est-il complexe ? (o/n) : "))
+    #         if c == 'o':
+    #             complexe = True
+    #             break
+    #         elif c == 'n':
+    #             complexe = False
+    #             break
+    #         print("Saisissez 'o' ou 'n' !")
+    #     except Exception:
+    #         print("Veuillez mettre 'o' ou 'n' !")
     grid = numpy.array([[0] * maze_size] * maze_size)
     generate_maze(grid, maze_size, complexe)
-
-
     g = graphic(grid)
     distance(grid, maze_size)
     solveMaze(grid, maze_size, g)

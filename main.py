@@ -165,5 +165,6 @@ if __name__ == '__main__':
 
 
     g = graphic(grid)
+    g.changecell(1,1)
     distance(grid, maze_size)
     solveMaze(grid, maze_size)

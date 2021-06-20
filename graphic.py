@@ -64,6 +64,7 @@ class graphic():
         l.pack()
 
         self.text = Entry(self.root, width=15)
+        self.text.insert(0,"25")
         self.text.pack()
         resolve = Button(self.root, text="Résoudre", pady=5, command=self.resolveLab)
         q = Button(self.root, text="Quitter", pady=5, command=exit)

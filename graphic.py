@@ -30,7 +30,6 @@ class graphic():
         self.canvas.delete("all")
         val = self.text.get()
         if val != '':
-            print("e")
             try:
                 self.maze_size = int(val)
                 self.gap=(625/self.maze_size)
@@ -53,7 +52,6 @@ class graphic():
     def resolveLab(self):
         if self.created:
             self.created = False
-            print("e")
             self.grid = main.distance(self.grid, self.maze_size)
             self.solveMaze()
 
@@ -85,7 +83,7 @@ class graphic():
                                      outline="black", fill="#8B0000")
         self.canvas.pack()
         self.root.update()
-        time.sleep(0.01)
+        time.sleep(0.04)
 
     def end(self):
         self.root.mainloop()

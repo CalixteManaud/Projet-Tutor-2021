@@ -36,7 +36,7 @@ class graphic():
                 self.gap=(625/self.maze_size)
 
                 self.pad = (self.root.winfo_width()/2)-((self.maze_size*self.gap)/2)
-                if self.maze_size != 0 and self.maze_size > 10 and self.maze_size < 150 and self.maze_size % 2 != 0:
+                if self.maze_size != 0 and self.maze_size > 10 and self.maze_size < 200 and self.maze_size % 2 != 0:
                     self.created = True
                     self.grid = numpy.array([[0] * self.maze_size] * self.maze_size)
                     self.grid = main.generate_maze(self.grid, self.maze_size, self.chkValue.get())
@@ -85,7 +85,7 @@ class graphic():
                                      outline="black", fill="#8B0000")
         self.canvas.pack()
         self.root.update()
-        time.sleep(0.05)
+        time.sleep(0.01)
 
     def end(self):
         self.root.mainloop()

@@ -96,22 +96,22 @@ class graphic():
         y = 1
         self.changecell(0, 1)
         self.changecell(y, x)
-        while x != self.maze_size - 1 and y != self.maze_size - 1:
-            if self.grid[x][y] >= self.grid[x + 1][y] > 0:
+        while x != self.maze_size - 1 and y != self.maze_size - 1: #tant que le programme n'est pas arrivé à la sortie du labyrinthe
+            if self.grid[x][y] >= self.grid[x + 1][y] > 0: #si la case actuelle est supérieur à la case de droite, se déplacer vers cette case et la mettre à 0
                 self.grid[x][y] = 0
                 x += 1
                 self.changecell(y, x)
-            elif self.grid[x][y] >= self.grid[x - 1][y] > 0:
+            elif self.grid[x][y] >= self.grid[x - 1][y] > 0: #si la case actuelle est supérieur à la case de gauche, se déplacer vers cette case et la mettre à 0
                 self.grid[x][y] = 0
                 x -= 1
                 self.changecell(y, x)
-            elif self.grid[x][y] >= self.grid[x][y - 1] > 0:
+            elif self.grid[x][y] >= self.grid[x][y - 1] > 0: #si la case actuelle est supérieur à la case en-dessous, se déplacer vers cette case et la mettre à 0
                 self.grid[x][y] = 0
                 y -= 1
                 self.changecell(y, x)
-            elif self.grid[x][y] >= self.grid[x][y + 1] > 0:
+            elif self.grid[x][y] >= self.grid[x][y + 1] > 0: #si la case actuelle est supérieur à la case au-dessus, se déplacer vers cette case et la mettre à 0
                 self.grid[x][y] = 0
                 y += 1
                 self.changecell(y, x)
-        self.grid[1][0] = 0
-        self.grid[self.maze_size - 2][self.maze_size - 1] = 0
+        self.grid[1][0] = 0 #mettre la case de l'entrée du labyrinthe à 0
+        self.grid[self.maze_size - 2][self.maze_size - 1] = 0 #mettre la case de la sortie du labyrinthe à 0

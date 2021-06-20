@@ -11,7 +11,7 @@ Ceci un dépot github de tout notre code [Python](https://www.python.org) sur pl
 
 --------------------
 
-### <em> Il y a deux parties :</em>
+### <em>Il y a deux parties :</em>
 
 - Partie générale
 - Partie graphique

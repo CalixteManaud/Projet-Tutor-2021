@@ -28,4 +28,3 @@ L'utilisateur on doit préciser la taille du labyrinthe et de voir si ce labyrin
 - Configuration à la matrice 
 - Affichage du labytrinthe 
 - L'enchainement de l'I.A
-
